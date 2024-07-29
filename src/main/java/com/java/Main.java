@@ -1,17 +1,38 @@
 package com.java;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Random;
+import java.util.Scanner;
+
 public class Main {
 	public static void main(String[] args) {
-		//TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-		// to see how IntelliJ IDEA suggests fixing it.
-		System.out.printf("Hello and welcome!");
+		Scanner sc = new Scanner(System.in);
+		Random ran = new Random();
+		boolean playAgain;
 
-		for (int i = 1; i <= 5; i++) {
-			//TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-			// for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-			System.out.println("i = " + i);
-		}
+		do {
+			System.out.println("Zagrajmy w kamień papier i nożyce!");
+			System.out.println("Wpisz odpowiednią cyfrę aby wybrać:");
+			System.out.println("0 - Kamień");
+			System.out.println("1 - Papier");
+			System.out.println("2 - Nożyce");
+
+			int userChoiceInt = sc.nextInt();
+			String userChoice = Game.getChoiceName(userChoiceInt);
+
+			int computerChoiceInt = ran.nextInt(3);
+			String computerChoice = Game.getChoiceName(computerChoiceInt);
+
+			System.out.println("Twój wybór: " + userChoice);
+			System.out.println("Wybór komputera: " + computerChoice);
+
+			String result = Game.determineWinner(userChoiceInt, computerChoiceInt);
+			System.out.println(result);
+
+			System.out.println("Czy chcesz zagrać ponownie? (tak/nie)");
+			playAgain = sc.next().equalsIgnoreCase("tak");
+
+		} while (playAgain);
+
+		sc.close();
 	}
 }
